@@ -1,0 +1,11 @@
+Model Information:
+* title:	STRONGHOLD portal
+* source:	https://sketchfab.com/3d-models/stronghold-portal-8f5bcdf50ea14a45a5887e472be8d5c0
+* author:	immergeion (https://sketchfab.com/immergeion)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "STRONGHOLD portal" (https://sketchfab.com/3d-models/stronghold-portal-8f5bcdf50ea14a45a5887e472be8d5c0) by immergeion (https://sketchfab.com/immergeion) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
