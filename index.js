@@ -4,6 +4,15 @@ const audio = document.querySelector('#markerAudio');
 audio.loop = true;
 
 // gestione tracciamento ----------
+// Migliora tracking su mobile
+AFRAME.registerComponent('markerhandler', {
+    init: function () {
+        this.el.addEventListener('markerFound', () => {
+            console.log('Marker trovato');
+        });
+    }
+});
+
 const marker_portal = document.querySelector('#portalMarker');
 const body_portal = document.querySelector('#portalbody');
 const body_achievement = document.querySelector('#achievementbody');
