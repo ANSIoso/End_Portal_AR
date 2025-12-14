@@ -1,73 +1,69 @@
 <!DOCTYPE html>
-<html>
+<html lang="it">
 
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AR Experience</title>
     <link href="https://fonts.cdnfonts.com/css/minecraft-4" rel="stylesheet">
     <script src="https://kit.fontawesome.com/06d84ce8cf.js" crossorigin="anonymous"></script>
-
+    <script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
+    <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
     <style>
         body {
+            margin: 0;
+            overflow: hidden;
             font-family: 'Minecraft', sans-serif;
         }
 
-        @keyframes loadingFade {
-            0% {
-                opacity: 1;
-            }
-
-            50% {
-                opacity: 0.2;
-            }
-
-            100% {
-                opacity: 1;
-            }
-        }
-
-        #loadingDiv>p {
-            position: relative;
-
-            font-size: xxx-large;
-
-            display: flex;
-            justify-content: center;
-            align-items: center;
-
-            animation: loadingFade 3s ease-in-out infinite;
-        }
-
-        #loadingDiv>i {
-            font-size: 40vh;
-
-            animation: loadingFade 3s ease-in-out infinite;
-        }
-
         #loadingDiv {
-            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
-            z-index: 9;
-            background-color: rgba(51, 50, 50, 0.5);
-
-            position: absolute 0;
-
+            height: 100%;
+            background-color: rgba(51, 50, 50, 0.9);
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-
+            z-index: 9;
             transition: opacity 0.5s ease-in;
         }
-    </style>
 
+        #loadingDiv i {
+            font-size: 40vh;
+            color: white;
+            text-shadow: 3px 3px 0 #000;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        #loadingDiv p {
+            font-size: 2em;
+            color: white;
+            margin-top: 2em;
+            text-shadow: 3px 3px 0 #000;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.3;
+            }
+        }
+    </style>
 </head>
 
-<script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
-<script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
-
-<body style="margin: 0px; overflow: hidden;">
+<body>
     <div id="loadingDiv">
         <i class="fa-solid fa-qrcode"></i>
-        <p>inquadra il qr</p>
+        <p>Inquadra il QR</p>
     </div>
 
     <audio id="markerAudio" src="./resources/minecraft end trim.mp3" preload="auto"></audio>
@@ -83,8 +79,12 @@
         </a-marker>
 
         <a-marker type="pattern" url="./qrcodes/pattern-figure.patt" id="figureMarker">
-            <a-box position="0 0.5 0" material="color: red; transparent: true; opacity: 0.50;">
-            </a-box>
+            <a-entity id="spawnerbody" gltf-model="./resources/3d_models/spawner_/scene.gltf" position="0 0 0"
+                scale="1.5 1.5 1.5" rotation="0 0 0">
+            </a-entity>
+            <a-entity id="stevebody" gltf-model="./resources/3d_models/new_steve/scene.gltf" position="0 0 0"
+                scale="0.12 0.12 0.12" rotation="0 0 0">
+            </a-entity>
         </a-marker>
 
         <a-entity camera></a-entity>

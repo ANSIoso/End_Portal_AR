@@ -1,0 +1,11 @@
+Model Information:
+* title:	Minecraft Steve (Rigged)
+* source:	https://sketchfab.com/3d-models/minecraft-steve-rigged-fbe1d1fab86d47b09171608103af3b2d
+* author:	Bully Magraptor (https://sketchfab.com/irex6510)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Minecraft Steve (Rigged)" (https://sketchfab.com/3d-models/minecraft-steve-rigged-fbe1d1fab86d47b09171608103af3b2d) by Bully Magraptor (https://sketchfab.com/irex6510) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
