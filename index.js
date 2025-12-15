@@ -1,10 +1,37 @@
+// ========= [SETTINGS] =========
+const marker_figure = document.querySelector('#figureMarker');
+const marker_portal = document.querySelector('#portalMarker');
+const body_achievement = document.querySelector('#achievementbody');
+const body_spawner = document.querySelector('#spawnerbody');
+const body_steve = document.querySelector('#stevebody');
+const body_portal = document.querySelector('#portalbody');
 
-// gestione audio -------------
+const portal = {
+    'position': { x: 0, y: 0, z: 0 },
+    'rotation': { x: 0, y: 90, z: 0 },
+    'scale': { x: 0.5, y: 0.5, z: 0.5 }
+}
+const achievement = {
+    'position': { x: 0, y: 0, z: -2 },
+    'rotation': { x: 0, y: 270, z: 40 },
+    'scale': { x: 0.5, y: 0.5, z: 0.5 }
+}
+const steve = {
+    'position': { x: 0, y: 0.5, z: 0 },
+    'rotation': { x: 0, y: 0, z: 40 },
+    'scale': { x: 0.12, y: 0.12, z: 0.12 }
+}
+const spawner = {
+    'position': { x: 0, y: 0, z: 0 },
+    'rotation': { x: 0, y: 0, z: 0 },
+    'scale': { x: 1, y: 1, z: 1 }
+}
+
+// ========= [GESTIONE AUDIO] =========
 const audio = document.querySelector('#markerAudio');
 audio.loop = true;
 
-// gestione tracciamento ----------
-// Migliora tracking su mobile
+// ========= [GESTIONE TRACCIAMENTO] =========
 AFRAME.registerComponent('markerhandler', {
     init: function () {
         this.el.addEventListener('markerFound', () => {
@@ -13,28 +40,34 @@ AFRAME.registerComponent('markerhandler', {
     }
 });
 
-const marker_portal = document.querySelector('#portalMarker');
-const body_portal = document.querySelector('#portalbody');
-const body_achievement = document.querySelector('#achievementbody');
 
 marker_portal.addEventListener('markerFound', async () => {
     somethingFound();
 
-    animate_in([body_portal, body_achievement], 0, 0.5);
-    wave_body(body_achievement, 0.2);
+    setBody(body_achievement, achievement)
+    setBody(body_portal, portal)
+
+    animate_in(body_achievement, achievement, 2000);
+    animate_in(body_portal, portal, 2000);
+
+    wave_body(body_achievement, achievement, 0.2);
 });
 
 marker_portal.addEventListener('markerLost', async () => {
     nothingFound();
 });
 
-const marker_figure = document.querySelector('#figureMarker');
-const body_spawner = document.querySelector('#spawnerbody');
-const body_steve = document.querySelector('#stevebody');
 
 marker_figure.addEventListener('markerFound', async () => {
-    rotate_body(body_steve)
     somethingFound();
+
+    setBody(body_spawner, spawner)
+    setBody(body_steve, steve)
+
+    animate_in(body_spawner, spawner, 2000);
+    animate_in(body_steve, steve, 2000);
+
+    rotate_body(body_steve, 0.3)
 });
 
 marker_figure.addEventListener('markerLost', async () => {
@@ -42,7 +75,7 @@ marker_figure.addEventListener('markerLost', async () => {
 });
 
 
-// gestione stato ---------
+// ========= [GESTIONE STATO] =========
 const loadingDiv = document.querySelector('#loadingDiv');
 const loading_alpha = 0.5
 
@@ -71,32 +104,31 @@ async function nothingFound() {
     loadingDiv.style.display = "flex";
 }
 
-// gestione movimento -------
+// ========= [GESTIONE MOVIMENTO] =========
+
+function setBody(body, settings) {
+    body.setAttribute('position', settings.position);
+    body.setAttribute('rotation', settings.rotation);
+    body.setAttribute('scale', settings.scale);
+}
 
 function lerp(a, b, t) {
     return a + (b - a) * t;
 }
 
-bodys_to_animate = NaN
-
-function animate_in(bodys, start, end) {
-    const duration = 2000; // milliseconds
+function animate_in(body, settings, duration) {
     const startTime = performance.now();
 
-    if (bodys == NaN)
+    if (body == NaN)
         return
 
-    bodys.flatMap((body) =>
-        body.setAttribute("scale", { x: 0, y: 0, z: 0 })
-    );
+    body.setAttribute("scale", { x: 0, y: 0, z: 0 })
 
     function step(time) {
         const progress = Math.min((time - startTime) / duration, 1);
-        const scale = lerp(start, end, progress);
+        const scale = lerp(0, settings.scale.x, progress);
 
-        bodys.flatMap((body) =>
-            body.setAttribute("scale", { x: scale, y: scale, z: scale })
-        );
+        body.setAttribute("scale", { x: scale, y: scale, z: scale })
 
         if (progress < 1) requestAnimationFrame(step);
     }
@@ -104,18 +136,19 @@ function animate_in(bodys, start, end) {
     requestAnimationFrame(step);
 }
 
-function wave_body(bodys_to_animate, interval) {
-    if (bodys_to_animate == NaN)
+function wave_body(bodys, settings, interval) {
+    if (bodys == NaN)
         return
 
-    const startPosition = Object.assign({}, bodys_to_animate.getAttribute("position"));
-
     function step() {
-        var t = (Math.sin(new Date().getTime() / 1000) + 1) * 0.5;
+        var t = (Math.sin(new Date().getTime() / 1000)) * interval;
+        new_y_pos = settings.position.y + t
 
-        new_y_pos = lerp(startPosition.y - interval, startPosition.y + interval, t)
-
-        bodys_to_animate.setAttribute("position", { x: startPosition.x, y: new_y_pos, z: startPosition.z })
+        bodys.setAttribute("position", {
+            x: settings.position.x,
+            y: new_y_pos, z:
+                settings.position.z
+        })
 
         requestAnimationFrame(step);
     }
@@ -123,14 +156,18 @@ function wave_body(bodys_to_animate, interval) {
     requestAnimationFrame(step);
 }
 
-function rotate_body(bodys_to_animate) {
-    if (bodys_to_animate == NaN)
+function rotate_body(body, speed) {
+    if (body == NaN)
         return
 
-
     function step() {
-        const actualRotation = bodys_to_animate.getAttribute("rotation");
-        bodys_to_animate.setAttribute("rotation", { x: actualRotation.x, y: actualRotation.y + 0.3, z: actualRotation.z })
+        const actualRotation = body.getAttribute("rotation");
+
+        body.setAttribute("rotation", {
+            x: actualRotation.x,
+            y: actualRotation.y + speed,
+            z: actualRotation.z
+        })
 
         requestAnimationFrame(step);
     }

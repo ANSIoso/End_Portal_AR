@@ -72,24 +72,22 @@
         <p>Inquadra il QR</p>
     </div>
 
-    <audio id="markerAudio" src="./resources/minecraft end trim.mp3" preload="auto"></audio>
+    <audio id="markerAudio" src="./resources/minecraft_song.mp3" preload="auto"></audio>
 
     <a-scene embedded arjs="sourceType: webcam; debugUIEnabled: false;">
         <a-marker type="pattern" url="./qrcodes/pattern-portal.patt" id="portalMarker">
-            <a-entity id="achievementbody" gltf-model="./resources/3d_models/achievement/scene.gltf" position="0 0 -2"
-                scale="0.5 0.5 0.5" rotation="0 270 40">
+
+            <a-entity id="achievementbody" gltf-model="./resources/3d_models/achievement/scene.gltf">
             </a-entity>
-            <a-entity id="portalbody" gltf-model="./resources/3d_models/end_portal/scene.gltf" position="0 0 0"
-                rotation="0 90 0">
+            <a-entity id="portalbody" gltf-model="./resources/3d_models/end_portal/scene.gltf">
             </a-entity>
+
         </a-marker>
 
         <a-marker type="pattern" url="./qrcodes/pattern-figure.patt" id="figureMarker">
-            <a-entity id="spawnerbody" gltf-model="./resources/3d_models/spawner_/scene.gltf" position="0 0 0"
-                scale="1 1 1" rotation="0 0 0">
+            <a-entity id="spawnerbody" gltf-model="./resources/3d_models/spawner/scene.gltf">
             </a-entity>
-            <a-entity id="stevebody" gltf-model="./resources/3d_models/new_steve/scene.gltf" position="0 0 0"
-                scale="0.12 0.12 0.12" rotation="0 0 0">
+            <a-entity id="stevebody" gltf-model="./resources/3d_models/best_steve/scene.gltf">
             </a-entity>
         </a-marker>
 
