@@ -7,12 +7,12 @@ const body_steve = document.querySelector('#stevebody');
 const body_portal = document.querySelector('#portalbody');
 
 const portal = {
-    'position': { x: 0, y: 0, z: 0 },
+    'position': { x: 0, y: 0, z: 0.4 },
     'rotation': { x: 0, y: 90, z: 0 },
-    'scale': { x: 0.5, y: 0.5, z: 0.5 }
+    'scale': { x: 0.85, y: 0.85, z: 0.85 }
 }
 const achievement = {
-    'position': { x: 0, y: 0, z: -2 },
+    'position': { x: 0, y: 1, z: -2 },
     'rotation': { x: 0, y: 270, z: 40 },
     'scale': { x: 0.5, y: 0.5, z: 0.5 }
 }
@@ -50,7 +50,7 @@ marker_portal.addEventListener('markerFound', async () => {
     animate_in(body_achievement, achievement, 2000);
     animate_in(body_portal, portal, 2000);
 
-    wave_body(body_achievement, achievement, 0.2);
+    wave_body(body_achievement, achievement, 0.3);
 });
 
 marker_portal.addEventListener('markerLost', async () => {
@@ -146,8 +146,8 @@ function wave_body(bodys, settings, interval) {
 
         bodys.setAttribute("position", {
             x: settings.position.x,
-            y: new_y_pos, z:
-                settings.position.z
+            y: new_y_pos,
+            z: settings.position.z
         })
 
         requestAnimationFrame(step);
