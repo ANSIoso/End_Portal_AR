@@ -11,7 +11,6 @@ A Minecraft-themed AR experience for my thesis acknowledgments. The experience i
 - [AR.js](https://ar-js-org.github.io/AR.js-Docs/) - Binds 3D objects to QR codes in the physical world
 - GitHub Pages - Hosts the experience
 - Blender - For editing 3D models
-- A-Frame - Web framework for building VR/AR experiences
 
 ## How to Access the Experience
 
@@ -20,18 +19,18 @@ The experience is accessed through 2 QR codes that are also used as anchors for 
 ### Portal QR Code
 Displays the Minecraft End Portal with a bouncing achievement notification. This QR code appears on my thesis.
 
-<div align="center" style="display: flex; align-items: center; justify-content: center; gap: 100px;">
-    <img src="./qrcodes/pattern-portal.png" style="border-radius: 8px; width: 40%" />
-    <img src="./resources/examples/portal_example.gif" style="border-radius: 8px; width: 20%" />
-</div>
+<p align="center">
+  <img src="./qrcodes/pattern-portal.png" alt="Pattern figure" width="42%">
+  <img src="./resources/examples/portal_example.gif" alt="Figure example animation" width="20%">
+</p>
 
 ### Spawner QR Code
 Displays a spawner with a spinning Steve figure inside. This QR code appears on the party favors.
 
-<div align="center" style="display: flex; align-items: center; justify-content: center; gap: 100px;">
-    <img src="./qrcodes/pattern-figure.png" style="border-radius: 8px; width: 40%" />
-    <img src="./resources/examples/figure_example.gif" style="border-radius: 8px; width: 20%" />
-</div>
+<p align="center">
+  <img src="./qrcodes/pattern-figure.png" alt="Pattern figure" width="42%">
+  <img src="./resources/examples/figure_example.gif" alt="Figure example animation" width="20%">
+</p>
 
 ## Credits
 
